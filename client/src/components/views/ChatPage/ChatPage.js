@@ -36,7 +36,7 @@ export class ChatPage extends Component {
                     <Row>
                         <Form layout="inline">
                             <Col span={18}>
-                                <Input id="message" prefix={<Icon type="message" style={{color: 'rgba(0,0,0,.25)'}} />} placeholder="Let's start talking" type="text" />
+                                <Input id="message" prefix={<Icon type="message" style={{color: 'rgba(0,0,0,.25)'}} />} placeholder="Let's start talking" type="text" value={this.state.chatMessage} />
                             </Col>
                             <Col span={2}>
 
