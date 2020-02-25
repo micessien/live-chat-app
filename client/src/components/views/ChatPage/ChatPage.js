@@ -3,6 +3,7 @@ import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
 import {connect} from "react-redux";
 import moment from 'moment';
+import {getChats} from ""
 
 export class ChatPage extends Component {
     state= {
@@ -11,6 +12,8 @@ export class ChatPage extends Component {
 
     componentDidMount() {
         let server = "http://localhost:5000";
+
+        this.props.dispatch(getChats());
 
         this.socket = io(server);
 
