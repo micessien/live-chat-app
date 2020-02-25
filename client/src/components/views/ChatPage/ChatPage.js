@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
+import {connect} from "react-redux";
+import {moment} from 'moment';
 
 export class ChatPage extends Component {
     state= {
@@ -11,6 +13,33 @@ export class ChatPage extends Component {
         let server = "http://localhost:5000";
 
         this.socket = io(server);
+    }
+
+    handleSearchChange = (e) => {
+        this.setState({
+            chatMessage: e.target.value
+        })
+    }
+
+    submitChatMessage = (e) => {
+        e.preventDafault();
+
+        let chatMessage = this.state.chatMessage;
+        let userId = this.props.user.userData._id;
+        let userName = this.props.user.userData.name;
+        let userImage = this.props.user.userData.image;
+        let nowTime = moment();
+        let type = "image";
+
+        this.socket.emit("Input Chat Message", {
+            chatMessage,
+            userId,
+            userName,
+            userImage,
+            nowTime,
+            type
+        });
+        this.setState({chatMessage: ""})
     }
 
     render() {
@@ -34,15 +63,22 @@ export class ChatPage extends Component {
                     </div>
 
                     <Row>
-                        <Form layout="inline">
+                        <Form layout="inline" onSubmit={this.submitChatMessage}>
                             <Col span={18}>
-                                <Input id="message" prefix={<Icon type="message" style={{color: 'rgba(0,0,0,.25)'}} />} placeholder="Let's start talking" type="text" value={this.state.chatMessage} />
+                                <Input
+                                    id="message"
+                                    prefix={<Icon type="message" style={{color: 'rgba(0,0,0,.25)'}} />}
+                                    placeholder="Let's start talking"
+                                    type="text"
+                                    value={this.state.chatMessage}
+                                    onChange={this.handleSearchChange}
+                                />
                             </Col>
                             <Col span={2}>
 
                             </Col>
                             <Col span={4}>
-                                <Button type="primary" style={{width: '100%'}} htmlType="submit">
+                                <Button type="primary" style={{width: '100%'}} onClick={this.submitChatMessage} htmlType="submit">
                                     <Icon type="enter"/>
                                 </Button>
                             </Col>
@@ -54,4 +90,10 @@ export class ChatPage extends Component {
     }
 }
 
-export default ChatPage
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(ChatPage)
