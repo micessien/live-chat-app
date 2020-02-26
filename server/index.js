@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
 const path = require("path");
 const cors = require('cors')
 
@@ -50,7 +49,7 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
+    cb(null, `${Date.now()}_${file.originalname}`)
   },
   // fileFilter: (req, file, cb) => {
   //   const ext = path.extname(file.originalname)
@@ -61,9 +60,9 @@ var storage = multer.diskStorage({
   // }
 })
 
-var upload = multer({ storage: storage });
+var upload = multer({ storage: storage }).single("file");
 
-router.post("/api/chat/uploadfiles", auth, (req, res) => {
+app.post("/api/chat/uploadfiles", auth, (req, res) => {
   upload(req, res, err => {
     if(err){
       return res.json({success: false, err})
