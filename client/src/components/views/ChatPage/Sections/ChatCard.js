@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 import moment from 'moment';
-import {Comment, Tooltip, Avatar} from 'antd';
+import { Comment, Tooltip, Avatar } from 'antd';
 
 function ChatCard(props) {
     return (
-        <div style={{width: '100%'}}>
+        <div style={{ width: '100%' }}>
             <Comment
                 author={props.sender.name}
                 avatar={
@@ -12,11 +12,13 @@ function ChatCard(props) {
                         src={props.sender.image} alt={props.sender.name}
                     />
                 }
-                content={<p>
-                    {props.message}
-                </p>}
+                content={
+                        <p>
+                            {props.message}
+                        </p>
+                }
                 datetime={
-                    <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+                    <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
                         <span>{moment().fromNow()}</span>
                     </Tooltip>
                 }
@@ -25,4 +27,4 @@ function ChatCard(props) {
     )
 }
 
-export default ChatCard
+export default ChatCard;

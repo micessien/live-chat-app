@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
 import {connect} from "react-redux";
@@ -29,15 +29,9 @@ export class ChatPage extends Component {
         })
     }
 
-    renderCards = () => {
-        this.props.chats.chats && this.props.chats.chats.map((chat) => {
+    renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => (
             <ChatCard key={chat._id} {...chat} />
-        })
-    }
-
-    // renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => {
-    //         <ChatCard key={chat._id} {...chat} />
-    //     });
+        ));
 
     submitChatMessage = (e) => {
         e.preventDefault();
@@ -61,7 +55,7 @@ export class ChatPage extends Component {
     }
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <React.Fragment>
                 <div>
