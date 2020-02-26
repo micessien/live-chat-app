@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
 import {connect} from "react-redux";
 import moment from 'moment';
-import {getChats} from ""
+import {getChats} from "../../../_actions/chat_actions";
+import ChatCard from "./Sections/ChatCard";
 
 export class ChatPage extends Component {
     state= {
@@ -28,6 +29,16 @@ export class ChatPage extends Component {
         })
     }
 
+    renderCards = () => {
+        this.props.chats.chats && this.props.chats.chats.map((chat) => {
+            <ChatCard key={chat._id} {...chat} />
+        })
+    }
+
+    // renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => {
+    //         <ChatCard key={chat._id} {...chat} />
+    //     });
+
     submitChatMessage = (e) => {
         e.preventDefault();
 
@@ -50,6 +61,7 @@ export class ChatPage extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <div>
@@ -58,9 +70,9 @@ export class ChatPage extends Component {
 
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                     <div className="infinite-container">
-                        {/* {this.props.chats && (
-                            <div>{this.renderCards()}</div>
-                        )} */}
+                        {this.props.chats && (
+                            this.renderCards()
+                        )}
                         <div
                             ref={el => {
                                 this.messagesEnd = el;
@@ -100,7 +112,8 @@ export class ChatPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        chats: state.chat
     }
 }
 

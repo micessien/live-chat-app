@@ -38,28 +38,29 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/chat', require('./routes/chat'));
 
 io.on("connection", socket => {
   socket.on("Input Chat Message", msg => {
     connect.then(db => {
-      try{
-        let chat = new Chat({message: msg.chatMessage, sender: msg.userID, type: msg.type})
+      try {
+          let chat = new Chat({ message: msg.chatMessage, sender:msg.userId, type: msg.type })
 
-        chat.save((err, doc) => {
-          if(err) return res.json({success: false, err})
+          chat.save((err, doc) => {
+            if(err) return res.json({ success: false, err })
 
-          Chat.find({"_id": doc._id})
-          .populate("sender")
-          .exec((err, doc) => {
+            Chat.find({ "_id": doc._id })
+            .populate("sender")
+            .exec((err, doc)=> {
 
-            return io.emit("Output Chat Message", doc)
+                return io.emit("Output Chat Message", doc);
+            })
           })
-        })
       } catch (error) {
         console.error(error);
       }
     })
-  })
+   })
 })
 
 
