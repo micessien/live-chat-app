@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
 import {connect} from "react-redux";
@@ -41,7 +41,7 @@ export class ChatPage extends Component {
         ));
 
         onDrop = (files) => {
-            console.log(files);
+            // console.log(files);
             let formData = new FormData;
 
             const config = {
@@ -96,7 +96,7 @@ export class ChatPage extends Component {
     render() {
         // console.log(this.props);
         return (
-            <React.Fragment>
+            <Fragment>
                 <div>
                     <p style={{ fontSize: '2rem', textAlign: 'center' }}> Real Time Chat</p>
                 </div>
@@ -149,7 +149,7 @@ export class ChatPage extends Component {
                         </Form>
                     </Row>
                 </div>
-            </React.Fragment>
+            </Fragment>
         )
     }
 }
