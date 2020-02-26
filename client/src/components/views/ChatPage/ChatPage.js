@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import moment from 'moment';
 import {getChats, afterPostMessage} from "../../../_actions/chat_actions";
 import ChatCard from "./Sections/ChatCard";
+import Dropzone from "react-dropzone";
+import Axios from "axios";
 
 export class ChatPage extends Component {
     state= {
@@ -37,6 +39,20 @@ export class ChatPage extends Component {
     renderCards = () => this.props.chats.chats && this.props.chats.chats.map((chat) => (
             <ChatCard key={chat._id} {...chat} />
         ));
+
+        onDrop = (files) => {
+            console.log(files);
+            let formData = new FormData;
+
+            const config = {
+                header: {'content-type':'multipart/form-data'}
+            }
+
+            formData.append('file', files[0]);
+
+            Axios.post('api/chat/uploadfiles', formData, config)
+            .then()
+        }
 
     submitChatMessage = (e) => {
         e.preventDefault();
@@ -93,7 +109,18 @@ export class ChatPage extends Component {
                                 />
                             </Col>
                             <Col span={2}>
-
+                                <Dropzone onDrop={this.onDrop}>
+                                    {({getRootProps, getInputProps}) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                <Button>
+                                                    <Icon type="upload" />
+                                                </Button>
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
                             </Col>
 
                             <Col span={4}>
