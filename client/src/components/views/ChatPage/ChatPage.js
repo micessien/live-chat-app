@@ -3,7 +3,7 @@ import {Form, Icon, Input, Button, Row, Col} from 'antd';
 import io from "socket.io-client";
 import {connect} from "react-redux";
 import moment from 'moment';
-import {getChats} from "../../../_actions/chat_actions";
+import {getChats, afterPostMessage} from "../../../_actions/chat_actions";
 import ChatCard from "./Sections/ChatCard";
 
 export class ChatPage extends Component {
@@ -19,7 +19,8 @@ export class ChatPage extends Component {
         this.socket = io(server);
 
         this.socket.on("Output Chat Message", messageFromBackEnd => {
-            console.log(messageFromBackEnd)
+            console.log(messageFromBackEnd);
+            this.props.dispatch(afterPostMessage(messageFromBackEnd));
         })
     }
 
