@@ -24,6 +24,10 @@ export class ChatPage extends Component {
         })
     }
 
+    componentDidUpdate() {
+        this.messagesEnd.scrollIntoView({behavior: 'smooth'});
+    }
+
     hanleSearchChange =(e) => {
         this.setState({
             chatMessage: e.target.value
@@ -64,7 +68,7 @@ export class ChatPage extends Component {
                 </div>
 
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                    <div className="infinite-container">
+                    <div className="infinite-container" style={{height: '500px', overflow: 'scroll'}}>
                         {this.props.chats && (
                             this.renderCards()
                         )}
