@@ -8,6 +8,7 @@ To use this application,
 3. Type " npm install " inside the root directory ( Download Server Dependencies )
 4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
 5. Create a folder named " uploads " inside the root directory (For uploads files)
+6. Run dev : `npm run dev`
 
 If you have problem, feel free to ask me ^^
 
