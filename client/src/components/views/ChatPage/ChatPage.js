@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import {Form, Icon, Input, Button, Row, Col} from 'antd';
+import {Form, Input, Button, Row, Col} from 'antd';
+// Icons
+import MessageOutlined from '@ant-design/icons/MessageOutlined';
+import UploadOutlined from '@ant-design/icons/UploadOutlined';
+import EnterOutlined from '@ant-design/icons/EnterOutlined';
 import io from "socket.io-client";
 import {connect} from "react-redux";
 import moment from 'moment';
@@ -119,7 +123,7 @@ export class ChatPage extends Component {
                             <Col span={18}>
                                 <Input
                                     id="message"
-                                    prefix={<Icon type="message" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    prefix={<MessageOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder="Let's start talking"
                                     type="text"
                                     value={this.state.chatMessage}
@@ -133,7 +137,7 @@ export class ChatPage extends Component {
                                             <div {...getRootProps()}>
                                                 <input {...getInputProps()} />
                                                 <Button>
-                                                    <Icon type="upload" />
+                                                    <UploadOutlined />
                                                 </Button>
                                             </div>
                                         </section>
@@ -143,7 +147,7 @@ export class ChatPage extends Component {
 
                             <Col span={4}>
                                 <Button type="primary" style={{ width: '100%' }} onClick={this.submitChatMessage}  htmlType="submit">
-                                    <Icon type="enter" />
+                                    <EnterOutlined />
                                 </Button>
                             </Col>
                         </Form>
