@@ -1,5 +1,4 @@
 import React from 'react'
-import {Icon} from 'antd';
 // Icons
 import SmileOutlined from '@ant-design/icons/SmileOutlined';
 
