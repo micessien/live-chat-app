@@ -3,8 +3,8 @@ import user from './user_reducer';
 import chat from './chat_reducer';
 
 const rootReducer = combineReducers({
-    user,
-    chat
+  user,
+  chat,
 });
 
 export default rootReducer;
