@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const path = require('path');
 const cors = require('cors');
 
@@ -113,8 +114,8 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
-
-const port = process.env.PORT || 5000;
+console.log('process.env.PORT------', process.env.PORT);
+const port = process.env.PORT || 5001;
 
 server.listen(port, () => {
   console.log(`Server Running at ${port}`);

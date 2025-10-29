@@ -18,7 +18,7 @@ export class ChatPage extends Component {
   };
 
   componentDidMount() {
-    let server = 'http://localhost:5000';
+    let server = 'http://localhost:5001';
 
     this.props.dispatch(getChats());
 
