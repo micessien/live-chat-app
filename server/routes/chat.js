@@ -8,7 +8,7 @@ const { Chat } = require('../models/Chat');
 //             Chat
 //=================================
 
-router.get('/getChats', (req, res) => {
+router.get('/get-chats', (req, res) => {
   Chat.find()
     .populate('sender')
     .exec((err, chats) => {
