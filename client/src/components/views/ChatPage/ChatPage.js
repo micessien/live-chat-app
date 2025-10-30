@@ -18,14 +18,14 @@ export class ChatPage extends Component {
   };
 
   componentDidMount() {
-    let server = 'http://localhost:5001';
+    let server = process.env.REACT_APP_API_URL;
 
     this.props.dispatch(getChats());
 
     this.socket = io(server);
 
     this.socket.on('Output Chat Message', (messageFromBackEnd) => {
-      console.log(messageFromBackEnd);
+      // console.log(messageFromBackEnd);
       this.props.dispatch(afterPostMessage(messageFromBackEnd));
     });
   }
