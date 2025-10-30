@@ -9,7 +9,7 @@ function LandingPage() {
         <br />
         <span style={{ fontSize: '2rem' }}>Let's Start Enjoy Life!</span>
       </div>
-      <div style={{ float: 'right' }}>Thanks For John Ahn</div>
+      <div style={{ float: 'right' }}>Thanks For Micael Dié</div>
     </>
   );
 }
