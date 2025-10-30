@@ -1,5 +1,7 @@
 # Realtime Chats Monorepo
-Thank you for Having interest in this repository ! A monorepo of realtime chats project — API, Data Model, Migrations, Packages and all the things
+Thank you for Having interest in this repository ! A monorepo of realtime chats project — API, Data Model, Migrations, Packages and all the things.
+
+This project is built with NodeJS, Express, MongoDB, Socket.io and React. it provides a real-time chat application with features like user authentication, chat rooms, and message history and it uses WebSockets to enable real-time communication between users. For data storage, it utilizes a database to store user information and chat messages.
 
 ## Setting up your development environment
 
@@ -29,9 +31,8 @@ yarn install
 
 After installing dependencies, follow the steps below:
 
-1. Set up Environment Variables: rename the `.env.example` file to `.env` and fill in the required environment variables such as database connection strings, API keys, and other configurations.
-2. Create `dev.js` file inside config folder. Ensure you have a running instance of the database specified in your `dev.js` from environment variables. Create the necessary databases and run any required migrations or seed scripts.
-3. Start App: Use the command below to start the development server.
+1. Set up Environment Variables in root and client: rename the `.env.example` file to `.env` and fill in the required environment variables such as database connection strings, API keys, and other configurations.
+2. Start App: Use the command below to start concurrently the development server & client.
 ```sh
 yarn dev
 ```
