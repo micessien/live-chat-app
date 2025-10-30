@@ -10,7 +10,7 @@ import moment from 'moment';
 import { getChats, afterPostMessage } from '../../../_actions/chat_actions';
 import ChatCard from './Sections/ChatCard';
 import Dropzone from 'react-dropzone';
-import Axios from 'axios';
+import axios from 'axios';
 
 export class ChatPage extends Component {
   state = {
@@ -45,6 +45,12 @@ export class ChatPage extends Component {
     this.props.chats.chats.map((chat) => <ChatCard key={chat._id} {...chat} />);
 
   onDrop = (files) => {
+    // Check if user is authenticated
+    if (!this.props.user.userData.isAuth) {
+      alert('Please log in first to send a message');
+      return;
+    }
+
     // console.log(files);
     let formData = new FormData();
 
@@ -54,7 +60,7 @@ export class ChatPage extends Component {
 
     formData.append('file', files[0]);
 
-    Axios.post('api/chat/uploadfiles', formData, config).then((response) => {
+    axios.post('api/chat/uploadfiles', formData, config).then((response) => {
       if (response.data.success) {
         let chatMessage = response.data.url;
         let userId = this.props.user.userData._id;
@@ -77,6 +83,11 @@ export class ChatPage extends Component {
 
   submitChatMessage = (e) => {
     e.preventDefault();
+    // Check if user is authenticated
+    if (!this.props.user.userData.isAuth) {
+      alert('Please log in first to send a message');
+      return;
+    }
 
     let chatMessage = this.state.chatMessage;
     let userId = this.props.user.userData._id;
