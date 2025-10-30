@@ -11,12 +11,6 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const config = require('./config/key');
 
-// const mongoose = require("mongoose");
-// mongoose
-//   .connect(config.mongoURI, { useNewUrlParser: true })
-//   .then(() => console.log("DB connected"))
-//   .catch(err => console.error(err));
-
 const { Chat } = require('./models/Chat');
 const { auth } = require('./middleware/auth');
 
@@ -114,7 +108,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'));
   });
 }
-console.log('process.env.PORT------', process.env.PORT);
 const port = process.env.PORT || 5001;
 
 server.listen(port, () => {
